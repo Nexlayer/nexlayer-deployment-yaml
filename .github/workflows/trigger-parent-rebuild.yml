@@ -1,18 +1,19 @@
-name: Trigger Parent Docs Rebuild
+name: Trigger Parent CI
 
 on:
   push:
     branches:
-      - main
       - test-submodule-update
 
 jobs:
   notify-parent:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Trigger dispatch on parent repo
+      - name: Trigger parent repo dispatch
         run: |
-          curl -X POST https://api.github.com/repos/Nexlayer/nexlayer-docs/dispatches \
+          echo "Triggering parent repo workflow..."
+          curl -X POST https://api.github.com/repos/Nimra-stellarstack/parent-repo/dispatches \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ secrets.PARENT_REPO_TOKEN }}" \
-            -d '{"event_type":"child-docs-updated"}'
+            -d '{"event_type": "child-updated"}'
