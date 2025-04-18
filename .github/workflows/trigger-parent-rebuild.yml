@@ -9,6 +9,15 @@ jobs:
   notify-parent:
     runs-on: ubuntu-latest
     steps:
+      - name: Check if secret is present
+        run: |
+          if [ -z "${{ secrets.PARENT_REPO_TOKEN }}" ]; then
+            echo "❌ Secret PARENT_REPO_TOKEN is NOT available."
+            exit 1
+          else
+            echo "✅ Secret PARENT_REPO_TOKEN is set."
+          fi
+
       - name: Trigger dispatch on parent repo
         run: |
           curl -X POST https://api.github.com/repos/Nexlayer/nexlayer-docs/dispatches \
