@@ -14,4 +14,4 @@ jobs:
           curl -X POST https://api.github.com/repos/Nexlayer/nexlayer-docs/dispatches \
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ secrets.PARENT_REPO_TOKEN }}" \
-          -d '{"event_type": "child-updated"}'
+          -d '{"event_type": "child-updated", "client_payload": {"branch": "mkdocs-documentation"}}'
