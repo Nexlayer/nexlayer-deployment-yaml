@@ -1,0 +1,17 @@
+name: Trigger Parent CI
+
+on:
+  push:
+    branches:
+      - mkdocs-documentation
+
+jobs:
+  notify-parent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger parent repo
+        run: |
+          curl -X POST https://api.github.com/repos/Nexlayer/nexlayer-docs/dispatches \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.PARENT_REPO_TOKEN }}" \
+          -d '{"event_type": "child-updated"}'
