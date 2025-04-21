@@ -3,7 +3,7 @@ name: Trigger Parent CI
 on:
   push:
     branches:
-      - mkdocs-documentation
+      - mkdocs-deployment-yaml
 
 jobs:
   notify-parent:
