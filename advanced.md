@@ -1,31 +1,97 @@
-# 🚀 Nexlayer Deployment YAML: Advanced Mode
+<!-- LOGO & HERO SECTION -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Nexlayer/nexlayer-deployment-yaml/main/.github/assets/nexlayer-logo.svg" alt="Nexlayer Logo" width="120" />
+</p>
 
-Hello developers! Welcome to the Nexlayer deployment YAML guide that gets you from zero to deployed in minutes. Whether you're a freelancer, indie developer, creator, or startup founder, this guide will help you deploy lightning-fast on Nexlayer AI Cloud.
+<h1 align="center">Nexlayer Advanced Mode: Enterprise-Grade Deployment</h1>
 
-## 📋 Table of Contents
+<p align="center">
+  <b>Deploy, scale, and secure your AI-powered cloud apps with confidence.</b><br>
+  <i>Production-ready YAML, best-in-class security, and seamless developer experience for senior engineers & CTOs.</i>
+</p>
 
-1. [What is Nexlayer?](#-what-is-nexlayer)
-2. [Quick Start: Deploy in 5 Minutes](#-quick-start-deploy-in-5-minutes)
-3. [YAML Building Blocks](#-yaml-building-blocks)
-4. [Image Management](#-image-management)
-5. [Visual Diagrams](#-visual-diagrams)
-6. [Common App Patterns](#-common-app-patterns)
-7. [Cheat Sheet: Pod Configuration](#-cheat-sheet-pod-configuration)
-8. [How Pods Talk to Each Other](#-how-pods-talk-to-each-other)
-9. [Storing Data with Volumes](#-storing-data-with-volumes)
-10. [Keeping Secrets Safe](#-keeping-secrets-safe)
-11. [Using Private Images](#-using-private-images)
-12. [Common Mistakes to Avoid](#-common-mistakes-to-avoid)
-13. [Full Example: Gaming Leaderboard App](#-full-example-gaming-leaderboard-app)
-14. [Real-World Use Cases](#-real-world-use-cases)
-15. [Pro Tips](#-pro-tips)
-16. [Next Steps](#-next-steps)
-17. [Detailed Schema Reference](#-detailed-schema-reference)
-18. [Important Distinctions](#-important-distinctions)
-19. [End-to-End Deployment Workflow](#-end-to-end-deployment-workflow)
-20. [Support & Community](#-support-community)
-21. [Advanced CI/CD Integration](#-advanced-ci-cd-integration)
-22. [Advanced Mode: Enterprise-Grade Deployment](#-advanced-mode-enterprise-grade-deployment)
+---
+
+## 📚 Navigation
+
+- [Quickstart](#quickstart)
+- [Key Concepts](#key-concepts)
+- [Using Your Own Images](#-using-your-own-images)
+- [Adding AI Models](#-adding-ai-models-self-hosted-or-api)
+- [Security Overview](#-security-overview)
+- [Pod Communication](#pod-communication)
+- [Volume Mounts](#volume-mounts)
+- [Recommended Security Practices](#-recommended-security-practices)
+- [Deployment Example](#-deployment-example-secure-ai-app)
+- [End-to-End Deployment Workflow](#-end-to-end-deployment-workflow)
+- [Quick Tips & Gotchas](#-quick-tips-to-avoid-oops-moments)
+- [Advanced CI/CD Integration](#-advanced-ci-cd-integration)
+- [Enterprise-Grade Example](#-advanced-mode-enterprise-grade-deployment)
+- [FAQ](#faq)
+- [Troubleshooting](#troubleshooting)
+- [Support & Community](#-support-community)
+
+---
+
+## 🚀 Quickstart
+
+> **Get started in minutes!**
+
+1. **Install Docker Desktop** (required for building images)
+2. **Clone this repo** or create your own project directory.
+3. **Write your `Dockerfile`** for your app or service.
+4. **Build and push your image** to a registry (see [Using Your Own Images](#-using-your-own-images)).
+5. **Copy the advanced YAML template** from this guide or use the [Deployment Template Builder](https://app.nexlayer.io/#/nexlayer-deployment-wizard).
+6. **Deploy with the CLI or API:**
+
+```bash
+curl -X POST https://api.nexlayer.io/deploy \
+  -F "file=@nexlayer.yaml"
+```
+
+> **Tip:** No API key required for first deployment! Nexlayer is ungated—just upload your YAML and go live instantly.
+
+---
+
+## 🧭 Key Concepts
+
+- **Declarative YAML:** Define your entire stack in a single file.
+- **Pod-based Architecture:** Each service runs in its own isolated container.
+- **Service Discovery:** Use `<pod-name>.pod` for seamless internal networking.
+- **Secrets Management:** Mount secrets as files, never expose in env vars.
+- **Auto-Scaling:** Nexlayer handles scaling and resource allocation for you.
+
+---
+
+<!-- VISUAL DIAGRAM PLACEHOLDER -->
+### 📊 Architecture Overview
+
+```mermaid
+graph TD
+  subgraph NexlayerCloud["Nexlayer AI Cloud Cluster"]
+    Frontend["Frontend Pod"]
+    Backend["Backend Pod"]
+    DB[(Postgres DB)]
+    AI["Self-Hosted AI Model"]
+    Cache[(Redis)]
+    Queue[(RabbitMQ)]
+    Analytics["Analytics Service"]
+    Prometheus["Prometheus"]
+    Grafana["Grafana"]
+  end
+  Frontend --> Backend
+  Backend --> DB
+  Backend --> AI
+  Backend --> Cache
+  Backend --> Queue
+  Analytics --> DB
+  Prometheus --> Backend
+  Grafana --> Prometheus
+```
+
+> **Note:** Replace with your own architecture diagram or use the [Mermaid Live Editor](https://mermaid-js.github.io/mermaid-live-editor/) to customize.
+
+---
 
 ## 🦾 ☁ What is Nexlayer?
 
@@ -1311,5 +1377,5 @@ application:
         REDIS_URL: "redis://cache.pod:6379/2"
 ```
 
-This example highlights Nexlayer’s ability to manage a complex, production-grade deployment with microservices, self-hosted AI models, observability tools, and task queues—all in a single configuration. Customize it to fit your needs and deploy with easex  Note: For GPU/TPU needs (e.g., for accelerating AI model inference with Ollama or Transformers), please contact sales team at sales@nexlayer.com(mailto:sales@nexlayer.com) to discuss tailored solutions.
+This example highlights Nexlayer's ability to manage a complex, production-grade deployment with microservices, self-hosted AI models, observability tools, and task queues—all in a single configuration. Customize it to fit your needs and deploy with easex  Note: For GPU/TPU needs (e.g., for accelerating AI model inference with Ollama or Transformers), please contact sales team at sales@nexlayer.com(mailto:sales@nexlayer.com) to discuss tailored solutions.
 
